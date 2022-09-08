@@ -22,14 +22,23 @@
 
 <body>
 
-	<h1>Evento</h1>
-
-	<!-- botao -->
-	<h3><a href="/eventos" class="waves-effect waves-light btn"><i
-			class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></h3>
+	<!-- header - navbar -->
+	<header>
+		<nav>
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Detalhes do Evento</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		        <li><a href="/eventos" class="waves-effect waves-light btn"><i
+					class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
+				<li><a href="/cadastrarEvento" class="waves-effect waves-light btn">
+					<i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></li>
+		      </ul>
+		    </div>
+ 		</nav>
+	</header>
 
 	<!-- <div th:each="evento : ${evento}" class="container detalhesEvento"> -->
-	<div class="container detalhesEvento">
+	<div class="container">
 		
 		<h5>Detalhes do Evento</h5>
 
@@ -39,6 +48,9 @@
 			<p>Data: <span th:text="${evento.data}"></span></p>
 			<p>Horario: <span th:text="${evento.horario}"></span></p>
 		</div>
+
+		<!-- Adicionar convidados -->
+		<h5>Adicionar convidados</h5>
 
 		<th:block th:include="evento/mensagemValidacao"></th:block>
 		
@@ -51,23 +63,26 @@
 		</form>
 
 		<!-- lista de convidados -->
+	
 		<h5>Lista de Convidados</h5>
-		
-		<div th:each="convidados : ${convidados}">
-			<div class="row">
-			
-				<div class="input-field col s6">
-					<p><span th:text="${convidados.nomeConvidado}"></span></p>
-				</div>
-			
-				<div class="input-field col s3">
-					<p><span th:text="${convidados.rg}"></span></p>
-				</div>
-			
-			</div>
-		</div>
+		<table class="container">
+			<thead>
+				<tr>
+					<th>Nome Convidado:</th>
+					<th>Rg:</th>
+					<th>Deletar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="convidados : ${convidados}">
+					<td><span th:text= "${convidados.nomeConvidado}"></span></td>
+					<td><span th:text= "${convidados.rg}"></span></td>
+					<td><a class="waves-effect waves-light btn.small" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}"><i class="material-icons left">delete</i></a></td>
+				</tr>
+			</tbody>
+	
+	</table>
 	</div>
-
 
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
