@@ -14,7 +14,10 @@
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta charset=UTF-8
-		"viewport" content="width=device-width, initial-scale=1.0" />
+		name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!-- importacao do css -->
+	<link rel="stylesheet" href="style/styleCss.css">
 	
 	<title>Evento</title>
 </head>
@@ -25,8 +28,8 @@
 	<!-- header - navbar -->
 	<header>
 		<nav>
-		    <div class="nav-wrapper">
-		      <a href="#" class="brand-logo">Detalhes do Evento</a>
+		    <div class="nav-wrapper" >
+		      <a href="#" class="brand-logo logo">Detalhes do Evento</a>
 		      <ul id="nav-mobile" class="right hide-on-med-and-down">
 		        <li><a href="/eventos" class="waves-effect waves-light btn"><i
 					class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
@@ -38,7 +41,7 @@
 	</header>
 
 	<!-- <div th:each="evento : ${evento}" class="container detalhesEvento"> -->
-	<div class="container">
+	<div class="container detalhesEvento">
 		
 		<h5>Detalhes do Evento</h5>
 
@@ -48,8 +51,11 @@
 			<p>Data: <span th:text="${evento.data}"></span></p>
 			<p>Horario: <span th:text="${evento.horario}"></span></p>
 		</div>
-
-		<!-- Adicionar convidados -->
+	</div>
+		
+		
+	<!-- Adicionar convidados -->
+	<div class="container formConvidado">
 		<h5>Adicionar convidados</h5>
 
 		<th:block th:include="evento/mensagemValidacao"></th:block>
@@ -58,14 +64,15 @@
 			Nome: <input type="text" value="" name="nomeConvidado" />
 			RG: <input type="text" value="" name="rg" />
 
-			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			<button class="waves-effect waves-light btn btnSave" type="submit">Salvar</button>
 			
 		</form>
+	</div>
 
-		<!-- lista de convidados -->
-	
+	<!-- lista de convidados -->
+
 		<h5>Lista de Convidados</h5>
-		<table class="container">
+		<table class="container tabelaConvidado">
 			<thead>
 				<tr>
 					<th>Nome Convidado:</th>
@@ -77,12 +84,11 @@
 				<tr th:each="convidados : ${convidados}">
 					<td><span th:text= "${convidados.nomeConvidado}"></span></td>
 					<td><span th:text= "${convidados.rg}"></span></td>
-					<td><a class="waves-effect waves-light btn.small" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}"><i class="material-icons left">delete</i></a></td>
+					<td><a class="waves-effect waves-light btn.small" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}"><i class="material-icons left delete">delete</i></a></td>
 				</tr>
 			</tbody>
 	
-	</table>
-	</div>
+		</table>
 
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

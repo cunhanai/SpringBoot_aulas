@@ -2,18 +2,23 @@
 <html lang="pt-br"
 	xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
 <head>
 
-<!--Import Google Icon Font-->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<!--Import materialize.css-->
-<link type="text/css" rel="stylesheet"
-	href="materialize/css/materialize.min.css" media="screen,projection" />
-
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta charset="UTF-8">
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet"
+		href="materialize/css/materialize.min.css" media="screen,projection" />
+	
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8">
+	
+	<!-- importacao do css -->
+		<link rel="stylesheet" href="style/styleCss.css">
 
 <title>EventoApp</title>
 
@@ -35,7 +40,9 @@
 
 	<th:block th:include="evento/mensagemValidacao"></th:block>
 	
-	<form class="container" method="post">
+	<form class="container formEvento" method="post">
+	
+		<h5>Cadastrar eventos</h5>
 		
 		Nome: <input type="text" value="" name="nome"/>
 		<div class="row">
@@ -50,7 +57,7 @@
 			</div>
 		</div>
 
-		<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+		<button class="waves-effect waves-light btn btnSave" type="submit">Salvar</button>
 
 	</form>
 

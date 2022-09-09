@@ -85,7 +85,7 @@ public class EventoController {
 		attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
 		return "redirect:/{codigo}";
 	}
-	
+
 	// DELETAR EVENTOS
 	@RequestMapping("/deletarEvento")
 	public String deletarEvento(long codigo) {
@@ -93,18 +93,43 @@ public class EventoController {
 		er.delete(evento);
 		return "redirect:/eventos";
 	}
-	
+
 	// DELETAR CONVIDADOS
 	@RequestMapping("/deletarConvidado")
-    public String deletarConvidado(String rg) {
-        Convidado convidado = cr.findByRg(rg);
-        cr.delete(convidado);
-        
-        Evento evento =  convidado.getEvento();
-        long codigoLong = evento.getCodigo();
-        String codigo = "" + codigoLong;
-        
-        return "redirect:/" + codigo ;    
-        
-    }
+	public String deletarConvidado(String rg) {
+		Convidado convidado = cr.findByRg(rg);
+		cr.delete(convidado);
+
+		Evento evento = convidado.getEvento();
+		long codigoLong = evento.getCodigo();
+		String codigo = "" + codigoLong;
+
+		return "redirect:/" + codigo;
+
+	}
+
+	// CRIA UMA PAGINA DE DESCRICAO DO EVENTO
+	@RequestMapping(value = "/alterarEvento_{codigo}", method = RequestMethod.GET)
+	public ModelAndView alterarEvento(@PathVariable("codigo") long codigo) {
+		Evento evento = er.findByCodigo(codigo);
+		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
+		mv.addObject("evento", evento);
+		return mv;
+	}
+
+	// SALVA OS DADOS PASSADOS NO FORMULARIO
+	@RequestMapping(value = "/alterarEvento_{codigo}", method = RequestMethod.POST)
+	public String alterarEvento(@PathVariable("codigo") long codigo, @Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
+
+		// VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
+		if (result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+			return "redirect:/cadastrarEvento";
+		}
+
+		er.save(evento);
+		attributes.addFlashAttribute("mensagem", "Evento adicionado com sucesso!");
+		return "redirect:/cadastrarEvento";
+	}
+
 }
