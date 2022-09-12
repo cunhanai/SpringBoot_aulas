@@ -2,58 +2,61 @@
 <html lang="pt-br"
 	xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-
+	
+	
 <head>
-
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-		rel="stylesheet">
+		rel="stylesheet" />
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet"
 		href="materialize/css/materialize.min.css" media="screen,projection" />
 	
 	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta charset="UTF-8">
+	<meta charset=UTF-8
+		name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!-- importacao do css -->
-		<link rel="stylesheet" href="style/styleCss.css">
-
-<title>EventoApp</title>
-
+	<link rel="stylesheet" href="style/styleCss.css">
+	
+	<title>Evento</title>
 </head>
+
+
 <body>
 
 	<!-- header - navbar -->
 	<header>
 		<nav>
-		    <div class="nav-wrapper">
-		      <a href="#" class="brand-logo">Cadastrar Eventos</a>
+		    <div class="nav-wrapper" >
+		      <a href="#" class="brand-logo logo">Detalhes do Evento</a>
 		      <ul id="nav-mobile" class="right hide-on-med-and-down">
 		        <li><a href="/eventos" class="waves-effect waves-light btn"><i
-					class="material-icons left">format_list_bulleted</i>Eventos</a></li>
+					class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
+				<li><a href="/cadastrarEvento" class="waves-effect waves-light btn">
+					<i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></li>
 		      </ul>
 		    </div>
  		</nav>
 	</header>
 
-	
-	<th:block th:include="evento/mensagemValidacao"></th:block>
+		
 	<form class="container formEvento" method="post">
 	
-		<h5>Cadastrar eventos</h5>
+		<h5>Editar Evento</h5>
 		
-		Nome: <input type="text" value="" name="nome"/>
+		<th:block th:include="evento/mensagemValidacao"></th:block>
+		
+		Nome: <input type="text" th:value="${evento.nome}" name="nome"/>
 		<div class="row">
 			<div class="input-field col s6">
-				Local: <input type="text" value="" name="local"/>
+				Local: <input type="text" th:value="${evento.local}" name="local"/>
 			</div>
 			<div class="input-field col s3">
-				Data: <input type="date" value="" name="data"/>
+				Data: <input type="date" th:value="${evento.data}" name="data"/>
 			</div>
 			<div class="input-field col s3">
-				Horário: <input type="time" value="" name="horario"/>
+				Horário: <input type="time" th:value="${evento.horario}" name="horario"/>
 			</div>
 		</div>
 
@@ -61,7 +64,8 @@
 
 	</form>
 
-	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>

@@ -50,6 +50,9 @@
 			<p>Local: <span th:text="${evento.local}"></span></p>
 			<p>Data: <span th:text="${evento.data}"></span></p>
 			<p>Horario: <span th:text="${evento.horario}"></span></p>
+			<p><a th:href="${(#mvc.url('EC#editarEvento').arg(0, evento.codigo)).build()}"
+				class="waves-effect waves-light btn btnSave">
+				<i class="material-icons left">edit</i>Edit</a></p>
 		</div>
 	</div>
 		
@@ -84,7 +87,8 @@
 				<tr th:each="convidados : ${convidados}">
 					<td><span th:text= "${convidados.nomeConvidado}"></span></td>
 					<td><span th:text= "${convidados.rg}"></span></td>
-					<td><a class="waves-effect waves-light btn.small" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}"><i class="material-icons left delete">delete</i></a></td>
+					<td><a th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}">
+						<i class="material-icons left btnIcon">delete</i></a></td>
 				</tr>
 			</tbody>
 	

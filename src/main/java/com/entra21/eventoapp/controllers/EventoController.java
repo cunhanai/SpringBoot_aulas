@@ -108,28 +108,28 @@ public class EventoController {
 
 	}
 
-	// CRIA UMA PAGINA DE DESCRICAO DO EVENTO
-	@RequestMapping(value = "/alterarEvento_{codigo}", method = RequestMethod.GET)
-	public ModelAndView alterarEvento(@PathVariable("codigo") long codigo) {
+	// CRIA UMA PAGINA DE EDICAO DO EVENTO
+	@RequestMapping(value = "/editar", method = RequestMethod.GET)
+	public ModelAndView editarEvento(long codigo) {
 		Evento evento = er.findByCodigo(codigo);
-		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
+		ModelAndView mv = new ModelAndView("evento/editarEvento");
 		mv.addObject("evento", evento);
 		return mv;
 	}
 
-	// SALVA OS DADOS PASSADOS NO FORMULARIO
-	@RequestMapping(value = "/alterarEvento_{codigo}", method = RequestMethod.POST)
-	public String alterarEvento(@PathVariable("codigo") long codigo, @Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
+	// SALVA AS ALTERACOES NO BANCO DE DADOS
+	@RequestMapping(value = "/editar", method = RequestMethod.POST)
+	public String editarEventoPost(long codigo, @Valid Evento evento, BindingResult result,
+			RedirectAttributes attributes) {
 
 		// VERIFICA SE OS CAMPOS FORAM PREENCHIDOS
 		if (result.hasErrors()) {
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/cadastrarEvento";
+			return "redirect:/editar";
 		}
 
 		er.save(evento);
-		attributes.addFlashAttribute("mensagem", "Evento adicionado com sucesso!");
-		return "redirect:/cadastrarEvento";
+		return "redirect:/eventos";
 	}
 
 }

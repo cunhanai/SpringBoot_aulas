@@ -33,7 +33,7 @@
 		      <a href="#" class="brand-logo">Lista de Eventos</a>
 		      <ul id="nav-mobile" class="right hide-on-med-and-down">
 		        <li><a href="/cadastrarEvento" class="waves-effect waves-light btn">
-					<i class="material-icons left btnSave">add_circle_outline</i>Cadastrar Evento</a></li>
+					<i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></li>
 		      </ul>
 		    </div>
  		</nav>
@@ -46,6 +46,7 @@
 			<th>Local</th>
 			<th>Data</th>
 			<th>Horário</th>
+			<th>Editar</th>
 			<th>Deletar</th>
 		</thead>
 		<tbody>
@@ -55,8 +56,10 @@
 					<td><span th:text="${evento.local}"></span></td>
 					<td><span th:text="${evento.data}"></span></td>
 					<td><span th:text="${evento.horario}"></span></td>
+					<td><a th:href="${(#mvc.url('EC#editarEvento').arg(0, evento.codigo)).build()}">
+						<i class="material-icons left btnIcon">edit</i></a></td>
 					<td><a th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.codigo)).build()}">
-						<i class="material-icons left delete">delete</i></a></td>
+						<i class="material-icons left btnIcon">delete</i></a></td>
 				</tr>
 		</tbody>
 	</table>
