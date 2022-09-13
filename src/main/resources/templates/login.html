@@ -18,34 +18,37 @@
 	
 	<!-- importacao do css -->
 	<link rel="stylesheet" href="style/styleCss.css">
-
-	<title>Aplicação Spring</title>
+	
+	<title>Login</title>
 </head>
 
 
 <body>
-
+	
 	<!-- header - navbar -->
 	<header>
-		<nav>
-		    <div class="nav-wrapper" >
-		      <a href="#" class="brand-logo logo">Detalhes do Evento</a>
-		      <ul id="nav-mobile" class="right hide-on-med-and-down">
-		        <li><a href="/eventos" class="waves-effect waves-light btn"><i
-					class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
-				<li><a href="/cadastrarEvento" class="waves-effect waves-light btn">
-					<i class="material-icons left">add_circle_outline</i>Cadastrar Evento</a></li>
-				<li><a href="/login" class="waves-effect waves-light btn">Login</a></li>
-		      </ul>
-		    </div>
- 		</nav>
-	</header>
-
-	<h1>Bem-vindo ao sistema para cadastro de eventos!!</h1>
-	<h3>Faça sei Login e cadastre seus eventos e listas de convidados!</h3>
-	
-	
-	<!-- imports do javascript -->
+        <nav class="menu">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">Login</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+              	<li><a href="/" class="waves-effect waves-light btn">Página Inicial</a></li>
+              </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- formulario de login -->
+    <h1>Acesso ao Cadastro de Eventos</h1>
+    
+    <form method="post">
+    	<div>User Name: <input type="text" value="" name="username" /></div>
+    	<div>Password:  <input type="text" value="" name="password" /></div>
+    	
+    	<div><input type="submit" value="Acessar" /></div>
+    </form>
+    
+    
+    <!-- imports do javascript -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
