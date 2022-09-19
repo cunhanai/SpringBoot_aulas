@@ -21,14 +21,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll().anyRequest()
-				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
+		http.csrf().disable().authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/").permitAll()
+		.antMatchers(HttpMethod.GET, "/cadastrarEvento").hasRole("ADMIN")
+		.antMatchers(HttpMethod.POST, "/cadastrarEvento").hasRole("ADMIN")
+		.anyRequest().authenticated()
+		.and().formLogin().loginPage("/login").permitAll()
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDatailsService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userDatailsService)
+		.passwordEncoder(new BCryptPasswordEncoder());
 
 //		auth.inMemoryAuthentication()
 //		.withUser("hello").password("{noop}123").roles("ADMIN");
