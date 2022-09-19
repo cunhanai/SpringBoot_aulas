@@ -10,7 +10,7 @@
 		rel="stylesheet" />
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet"
-		href="materialize/css/materialize.min.css" media="screen,projection" />
+		href="/materialize/css/materialize.min.css" media="screen,projection" />
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta charset=UTF-8
@@ -29,7 +29,7 @@
 	<header>
 		<nav>
 		    <div class="nav-wrapper" >
-		      <a href="#" class="brand-logo logo">Detalhes do Evento</a>
+		      <a href="#" class="brand-logo logo">Editar Convidado</a>
 		      <ul id="nav-mobile" class="right hide-on-med-and-down">
 		        <li><a href="/eventos" class="waves-effect waves-light btn"><i
 					class="material-icons left">format_list_bulleted</i>Lista de Eventos</a></li>
@@ -41,7 +41,8 @@
  		</nav>
 	</header>
 
-	<!-- <div th:each="evento : ${evento}" class="container detalhesEvento"> -->
+	<!-- detalhes evento -->
+	
 	<div class="container detalhesEvento">
 		
 		<h5>Detalhes do Evento</h5>
@@ -51,52 +52,23 @@
 			<p>Local: <span th:text="${evento.local}"></span></p>
 			<p>Data: <span th:text="${evento.data}"></span></p>
 			<p>Horario: <span th:text="${evento.horario}"></span></p>
-			<p><a th:href="${(#mvc.url('EC#editarEvento').arg(0, evento.codigo)).build()}"
-				class="waves-effect waves-light btn btnSave">
-				<i class="material-icons left">edit</i>Edit</a></p>
 		</div>
 	</div>
-		
-		
-	<!-- Adicionar convidados -->
-	<div class="container formConvidado">
-		<h5>Adicionar convidados</h5>
+	
+	<!-- editar convidados -->
+	
+	<form class="container formEvento" method="post">
+	
+		<h5>Editar Convidados</h5>
 
 		<th:block th:include="evento/mensagemValidacao"></th:block>
 		
-		<form method="post">
-			Nome: <input type="text" value="" name="nomeConvidado" />
-			RG: <input type="text" value="" name="rg" />
+		Nome: <input type="text" th:value="${convidado.nomeConvidado}" name="nomeConvidado" />
+		<p>RG: <br><span th:text="${convidado.rg}" name="rg"></span></p>
 
-			<button class="waves-effect waves-light btn btnSave" type="submit">Salvar</button>
-			
-		</form>
-	</div>
+		<button class="waves-effect waves-light btn btnSave" type="submit">Salvar</button>
 
-	<!-- lista de convidados -->
-
-		<h5>Lista de Convidados</h5>
-		<table class="container tabelaConvidado">
-			<thead>
-				<tr>
-					<th>Nome Convidado</th>
-					<th>RG</th>
-					<th>Editar</th>
-					<th>Deletar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="convidados : ${convidados}">
-					<td><span th:text= "${convidados.nomeConvidado}"></span></td>
-					<td><span th:text= "${convidados.rg}"></span></td>
-					<td><a th:href="${(#mvc.url('EC#editarConvidado').arg(0, evento.codigo).arg(1, convidados.rg)).build()}">
-						<i class="material-icons left btnIcon">edit</i></a></td>
-					<td><a th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidados.rg)).build()}">
-						<i class="material-icons left btnIcon">delete</i></a></td>
-				</tr>
-			</tbody>
-	
-		</table>
+	</form>
 
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

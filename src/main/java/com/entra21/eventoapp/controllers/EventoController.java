@@ -132,4 +132,28 @@ public class EventoController {
 		return "redirect:/eventos";
 	}
 
+	// CRIA UMA PAGINA DE EDICAO DO CONVIDADO
+	@RequestMapping(value = "/editarConvidado/{codigo}/{rg}", method = RequestMethod.GET)
+	public ModelAndView editarConvidado(@PathVariable("codigo") long codigo, @PathVariable("rg") String rg) {
+		Convidado convidado = cr.findByRg(rg);
+		Evento evento = convidado.getEvento();
+
+		ModelAndView mv = new ModelAndView("evento/editarConvidado");
+
+		mv.addObject("evento", evento);
+		mv.addObject("convidado", convidado);
+
+		return mv;
+	}
+
+	// SALVA AS ALTERACOES NO BANCO DE DADOS
+	@RequestMapping(value = "/editarConvidado/{codigo}/{rg}", method = RequestMethod.POST)
+	public String editarConvidadoPost(@PathVariable("codigo") long codigo, @PathVariable("rg") String rg,
+			Convidado convidado) {
+
+		Evento evento = er.findByCodigo(codigo);
+		convidado.setEvento(evento);
+		cr.save(convidado);
+		return "redirect:/{codigo}";
+	}
 }
